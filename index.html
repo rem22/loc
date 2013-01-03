@@ -19,6 +19,7 @@
     // onSuccess Geolocation
     //
     function onSuccess(position) {
+	var myloc;
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                             'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -28,6 +29,19 @@
                             'Heading: '            + position.coords.heading               + '<br />' +
                             'Speed: '              + position.coords.speed                 + '<br />' +
                             'Timestamp: '          +                                   position.timestamp          + '<br />';
+							myloc = "http://maps.googleapis.com/maps/api/staticmap?center="
+          + position.coords.latitude + "," + position.coords.longitude
+          + "&zoom=12&size=400x400&sensor=false";
+ 
+      // add a new img tag to the document
+      var img = document.createElement("img");
+      // set the src and style
+      img.setAttribute("src", myloc);
+      img.setAttribute("style", "height:400px;width:400px;");
+         
+      // get the paragraph tag we set for the location of the content
+      var p = document.body.getElementsByTagName("p")[0];
+      p.appendChild(img);
     }
 
     // onError Callback receives a PositionError object
